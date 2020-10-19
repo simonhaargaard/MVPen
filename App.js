@@ -1,7 +1,7 @@
-import React,{Component} from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Page1, Page2, Settings, Splash, LogInd, CreateAccount} from "./Components/Screens";
+import {Page1, Page2, Settings, LogInd, CreateAccount, Splash} from "./Components/Screens";
 import {createDrawerNavigator} from "@react-navigation/drawer";
 
 import {AuthContext} from "./Components/Context";
@@ -44,8 +44,6 @@ const HomePage = () =>(
         <AuthStack.Screen name = "Page2" component={Page2} options={{title: 'Page 2'}}/>
     </AuthStack.Navigator>
 );
-
-
 
 export default () => {
     const [isLoading, setIsLoading] = React.useState(true);
@@ -94,8 +92,6 @@ export default () => {
             logud: async () => {
                 try {
                     setIsLoading(true);
-                    const result = await firebase.auth.signOut();
-                    console.log(result);
                     setIsLoading(false);
                     setUserToken('');
                 }catch (e) {
