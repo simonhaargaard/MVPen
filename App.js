@@ -1,11 +1,13 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Page1, Page2, Settings, LogInd, CreateAccount, Splash} from "./Components/Screens";
+import {Page2, Settings, LogInd, CreateAccount, Splash} from "./Screens/Screens";
 import {createDrawerNavigator} from "@react-navigation/drawer";
+import _ from 'lodash';
 
 import {AuthContext} from "./Components/Context";
 import firebase from "firebase";
+import Page1 from "./Model/Page1";
 
 const AuthStack = createStackNavigator();
 const AuthStackScreen = () => (
@@ -14,7 +16,6 @@ const AuthStackScreen = () => (
         <AuthStack.Screen name = "Login" component={LogInd} options={{title: 'Login'}}/>
     </AuthStack.Navigator>
 )
-
 const Drawer = createDrawerNavigator();
 const DrawerScreen = () =>(
     <Drawer.Navigator initialRouteName={"Home"}>
@@ -122,6 +123,13 @@ export default () => {
     if (isLoading) {
         return <Splash/>
     }
+    console.ignoredYellowBox = (['Setting a timer']);
+    const _console = _.clone(console);
+    console.warn = message => {
+        if (message.indexOf('Setting a timer') <= -1) {
+            _console.warn(message);
+        }
+    };
     return (
         <AuthContext.Provider value={authContext}>
             <NavigationContainer>

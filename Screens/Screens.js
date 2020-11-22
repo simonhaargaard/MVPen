@@ -1,8 +1,9 @@
 import React from "react";
-import { Buttons } from "./Buttons";
-import {View, Text, Button, TouchableOpacity, ScrollView, StyleSheet} from 'react-native';
-import {AuthContext} from "./Context";
-import {TextField} from "./Form";
+import { Buttons } from "../Components/Buttons";
+import {View, Text, Button, TouchableOpacity, ScrollView, StyleSheet, FlatList} from 'react-native';
+import {AuthContext} from "../Components/Context";
+import {TextField} from "../Components/Form";
+import Tilføj from "../Model/TilføjProdukter";
 
 const ScreenContainer = ({ children }) => (
     <View style={styles.container}>{children}</View>
@@ -16,21 +17,13 @@ export const Page2 = ({navigation}) => {
         </ScreenContainer>
     )
 }
-export const Page1 = ({navigation}) => {
-    const {logud} = React.useContext(AuthContext);
-    return(
-        <ScreenContainer>
-            <Text>Her skal jeg indsætte en flatlist med alle produkter som er til salg</Text>
-            <Button title="Gå til produkt" onPress={() => navigation.push("Page2")}/>
-            <Button title="Sign out" onPress={() => logud()}/>
-        </ScreenContainer>
-    )
-}
 export const Settings = ({navigation}) => {
+    const {logud} = React.useContext(AuthContext);
     return(
         <ScreenContainer>
             <Text>Her skal man kunne se sine egne produkter man har til salg</Text>
             <Button title="Tilføj produkt" onPress={() => alert("Todo")}/>
+            <Button title="Sign out" onPress={() => logud()}/>
         </ScreenContainer>
     )
 }
